@@ -25,5 +25,27 @@ def base_to_decimal(val, base = 73, symbols = None):
 
     return(dec)
 
-
     
+def decimal_to_base(d, base, symbols = None):
+    ''' Convert decimal value 'd' into a form with base = "base". If not provided, symbols are defined by the provided-list 'symbols' (ordered sequentially) into
+    decimal representation. By default, symbol set is composed of digits(0-9),lower-case alphabets(a-z), upper-case alphabets(A-Z) and
+    safe-symbols( $, -, _, ., +, !, *, ', (, ), , ), (in this order). For base>73, user must provide symbol set. Returns result as a string'''
+    
+    if symbols is None:
+        
+        symbols = [str(i) for i in range(0,10)] + list(string.ascii_lowercase) + list(string.ascii_uppercase) + list("$-_.+!*'(),")
+
+        if base < len(symbols):
+            symbols = symbols[:base]
+        
+    if base > len(symbols):
+        raise Exception("Base_SymbolArray_Error:Base does not equal Symbol Set Size.")
+
+    symbol_dic = { i:symbols[i] for i in range(base) } #Dictionary for fast access of key-values
+
+    res = []
+    while d > 0:
+        res.append(symbol_dic[d%base])
+        d //= base
+
+    return ''.join(res[::-1])
