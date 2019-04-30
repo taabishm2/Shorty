@@ -21,7 +21,11 @@ def base_to_decimal(val, base = 73, symbols = None):
 
     dec = 0
     val = str(val)[::-1]
-    for i in range(len(val)): dec += symbol_dic[val[i]] * pow(base,i)
+
+    try:
+        for i in range(len(val)): dec += symbol_dic[val[i]] * pow(base,i)
+    except:
+        raise Exception("Symbol_set_deficient:One or more Symbols are not present in the Current Symbol-Set")
 
     return(dec)
 
@@ -44,8 +48,18 @@ def decimal_to_base(d, base, symbols = None):
     symbol_dic = { i:symbols[i] for i in range(base) } #Dictionary for fast access of key-values
 
     res = []
-    while d > 0:
-        res.append(symbol_dic[d%base])
-        d //= base
+
+    try:
+        while d > 0:
+            res.append(symbol_dic[d%base])
+            d //= base
+    except:
+        raise Exception("Symbol_set_deficient:One or more Symbols are not present in the Current Symbol-Set")
 
     return ''.join(res[::-1])
+
+def base_change(val, ibase, fbase, isymbols = None, fsymbols = None):
+    ''' Converts the string 'val' from current base = 'ibase' to a different base 'fbase'. Base 'ibase' has symbol-set 'isymbols' list to represent symbols and base
+    'fbase' uses 'fsymbols' list to represent symbols '''
+
+    return( decimal_to_base( base_to_decimal(val, ibase, isymbols) ,fbase,fsymbols) )
