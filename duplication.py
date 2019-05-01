@@ -18,7 +18,6 @@ def check_duplication(shortlink,fulllink):
             return 0
         else:
             return 1 #Shortlink collision
-
     else:
         return -1 #Current short or long links don't exist in Db
 
