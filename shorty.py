@@ -2,6 +2,7 @@ import hashlib
 import validate_url
 import arbitrary_encoder
 import db_upload
+import db_fetch
 
 def url_hash(url):
     '''Obtain 160 bit hash of the input url using SHA1'''
@@ -27,3 +28,10 @@ def url_encode(url):
             return(shortlink)  #If shortlink not found in database or if found & link is same 
     else:
         raise Exception("Shortkey_space_exhausted:Modify the url to check other scopes")
+
+def url_decode(shortkey):
+    '''Returns original link corresponsding to the shortkey (if present)'''
+
+    return db_fetch.fetch_link(shortkey)
+
+    
