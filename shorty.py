@@ -26,7 +26,7 @@ def pick_shortlink(base):
 
     for i in range(0,20):
         shortlink = base[i:i+6]
-        if True: break  #If shortlink not found in database or if found & link is same 
+        if True: return(shortlink)  #If shortlink not found in database or if found & link is same 
     else:
         raise Exception("Shortkey_space_exhausted:Modify the url to check other scopes")
 
