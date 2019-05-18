@@ -51,11 +51,11 @@
                         {% if not inputlink %}
                         <div class="hero-copy">
                             <div class="container-sm">
-                                <h1 class="hero-title h2-mobile mt-0 is-revealing">Enter full/short link</h1>
-                                <p class="hero-paragraph is-revealing">Enter the full link to be shortified or a shortened link to obtain</p>
+                                <h1 class="hero-title h2-mobile mt-0 is-revealing">Your converted link is:</h1>
+                                <p class="hero-paragraph is-revealing">{{ link}}</p>
                                 <div class="hero-form newsletter-form field field-grouped is-revealing">
                                     <div class="control control-expanded">
-                                        <form action="http://localhost:5001/converted" method="POST">
+                                        <form action="http://localhost:5001" method="POST">
                                             <input class="input" type="text" name="inputlink" placeholder="Enter link here">
                                     </div>
                                     <div class="control">
