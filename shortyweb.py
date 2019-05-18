@@ -6,7 +6,20 @@ app = Flask(__name__)
 
 @app.route("/",methods=['POST','GET'])
 def main():
-    return render_template('index.html')
+    inp = request.form
+
+    if len(inp) == 0:
+        return render_template('index.html')
+
+    link = inp['inputlink']
+    if shorty.validate_url.validate_url(link):
+        vlink = link
+        rcode = shorty.url_encode(link)
+    else:
+        rcode = shorty.url_decode(link)
+        vlink = rcode
+
+    return render_template('index.html',slink=rcode,vlink=vlink)
 
 @app.route("/converted", methods=['POST','GET'])
 def convert():
