@@ -12,11 +12,11 @@ def sql_insert(shortlink,fulllink):
                 );
             """) #Inserts value only if it is absent
 
-    connection = psql.connect(user = "postgres", password = "qwerty123456", database = "initial_db")
+    connection = psql.connect(user = "postgres", password = "####", database = "initial_db")
     cur = connection.cursor()
 
     cur.execute( query, (shortlink, fulllink, shortlink,) )
 
     cur.close()
     connection.commit()
-    
+
